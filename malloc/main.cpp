@@ -8,21 +8,31 @@
 
 #include <iostream>
 
+struct Student
+{
+    char name[100];
+    int age;
+    char sex[3];
+};
 int main(int argc, const char * argv[]) {
     // insert code here...
-    int *p;
-    int i,j,temp;
+    Student *p;
+    Student temp;
+    int i,j;
     int N;
     scanf("%d",&N);
-    p = (int *)malloc(N*4);
-    
+    //p = (int *)malloc(N*4);
+    p = new Student[N];
+    if (p==0) {
+        exit(0);
+    }
     for (i = 0; i<N; i++)
-        scanf("%d",&p[i]);
+        scanf("%s %s %d",p[i].name,p[i].sex,&p[i].age);
     for (int i = 0; i<N-1; i++)
     {
         for (j=0; j<N-1-i;j++ )
         {
-            if (p[j]>p[j+1])
+            if (p[j].age>p[j+1].age)
             {
                 temp = p[j];
                 p[j] = p[j+1];
@@ -32,7 +42,8 @@ int main(int argc, const char * argv[]) {
     }
     for (i=0; i<N; i++)
     {
-        printf("%d\n",p[i]);
+        printf("%s %s %d",p[i].name,p[i].sex,p[i].age);
     }
+    delete p;
     return 0;
 }
