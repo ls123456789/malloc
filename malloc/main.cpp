@@ -10,18 +10,29 @@
 
 int main(int argc, const char * argv[]) {
     // insert code here...
-    int *p,*q;
-    p = (int *)malloc(16*4);
-    q = (int *)malloc(16*4);
-    for (int i = 0; i<16; i++)
-        p[i] = i*10;
-    for (int j = 0; j<16; j++)
-        q[j] = j*100;
+    int *p;
+    int i,j,temp;
+    int N;
+    scanf("%d",&N);
+    p = (int *)malloc(N*4);
     
-    for (int j = 0; j<16; j++)
-        printf("p[%d] = %d \n",j,p[j]);
-    for (int j = 0; j<16; j++)
-        printf("q[%d] = %d \n",j,q[j]);
-    printf("%x  %x\n",p,q);
+    for (i = 0; i<N; i++)
+        scanf("%d",&p[i]);
+    for (int i = 0; i<N-1; i++)
+    {
+        for (j=0; j<N-1-i;j++ )
+        {
+            if (p[j]>p[j+1])
+            {
+                temp = p[j];
+                p[j] = p[j+1];
+                p[j+1] = temp;
+            }
+        }
+    }
+    for (i=0; i<N; i++)
+    {
+        printf("%d\n",p[i]);
+    }
     return 0;
 }
